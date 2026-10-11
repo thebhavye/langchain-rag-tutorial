@@ -32,7 +32,11 @@ def generate_data_store():
 
 
 def load_documents():
-    loader = DirectoryLoader(DATA_PATH, glob="*.md")
+    if os.environ.get("PLAIN_TEXT_LOADER"):      # where unstructured's native parser won't run (e.g. Windows)
+        from langchain_community.document_loaders import TextLoader
+        loader = DirectoryLoader(DATA_PATH, glob="*.md", loader_cls=TextLoader, loader_kwargs={"encoding": "utf-8"})
+    else:
+        loader = DirectoryLoader(DATA_PATH, glob="*.md")
     documents = loader.load()
     return documents
 
