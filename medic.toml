@@ -1,0 +1,16 @@
+# Agent Medic: how to run and heal this agent. See `agent-medic init --help`.
+
+[agent]
+entrypoint = "query_data:answer"
+files = ["providers.py", "query_data.py"]
+python = ".venv-rag/Scripts/python.exe"
+
+[neatlogs]
+workflow = "rag-tutorial"
+
+[deploy]
+mode = "pr"
+branch = "main"
+
+[evals]
+cases = ".medic/evals.jsonl"

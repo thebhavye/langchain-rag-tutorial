@@ -11,3 +11,5 @@ openai==1.31.1 # For embeddings
 tiktoken==0.7.0  # For embeddings 
 
 # install markdown depenendies with: `pip install "unstructured[md]"` after install the requirements file. Leave this line commented out. 
+agent-medic @ git+https://github.com/thebhavye/agent-medic.git
+neatlogs

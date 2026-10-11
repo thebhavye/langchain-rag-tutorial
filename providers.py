@@ -7,8 +7,10 @@ OPENAI_BASE_URL any OpenAI-compatible endpoint works.
 import os
 
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+import medic_runtime as medic
 
 
+@medic.surface("embeddings")
 def embeddings():
     if os.environ.get("EMBEDDINGS") == "google":
         from langchain_google_genai import GoogleGenerativeAIEmbeddings
@@ -42,5 +44,6 @@ class _Paced:
         return self.inner.embed_query(text)
 
 
+@medic.surface("chat")
 def chat():
     return ChatOpenAI(model=os.environ.get("CHAT_MODEL", "gpt-3.5-turbo"))
