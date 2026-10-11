@@ -17,7 +17,7 @@ load_dotenv()
 # your .env file.
 openai.api_key = os.environ.get('OPENAI_API_KEY')
 
-CHROMA_PATH = "chroma"
+CHROMA_PATH = os.environ.get("CHROMA_PATH", "chroma")   # where the vector store lives
 DATA_PATH = "data/books"
 
 

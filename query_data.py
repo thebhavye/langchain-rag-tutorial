@@ -13,7 +13,7 @@ if not os.environ.get("MEDIC_RUNNER"):          # Medic's own runs initialize ne
                   tags=["env:" + os.environ.get("MEDIC_ENV", "prod"),
                         "release:" + os.environ.get("GIT_SHA", "dev")[:12]])
 
-CHROMA_PATH = "chroma"
+CHROMA_PATH = os.environ.get("CHROMA_PATH", "chroma")   # where the vector store lives
 
 PROMPT_TEMPLATE = """
 Answer the question based only on the following context:
