@@ -18,6 +18,7 @@ Answer the question based on the above context: {question}
 
 
 NO_RESULTS = "Unable to find matching results."
+MIN_RELEVANCE = 0.6        # calibrated for Gemini embeddings (OpenAI ada-002 scores run higher: 0.7)
 
 
 def retrieve(query_text: str):
@@ -31,7 +32,7 @@ def retrieve(query_text: str):
 
 def answer(query_text: str, results=None) -> str:
     results = retrieve(query_text) if results is None else results
-    if len(results) == 0 or results[0][1] < 0.7:
+    if len(results) == 0 or results[0][1] < MIN_RELEVANCE:
         return NO_RESULTS
 
     context_text = "\n\n---\n\n".join([doc.page_content for doc, _score in results])
