@@ -1,8 +1,7 @@
 import argparse
 # from dataclasses import dataclass
 from langchain_community.vectorstores import Chroma
-from langchain_openai import OpenAIEmbeddings
-from langchain_openai import ChatOpenAI
+from providers import chat, embeddings
 from langchain.prompts import ChatPromptTemplate
 
 CHROMA_PATH = "chroma"
@@ -23,7 +22,7 @@ NO_RESULTS = "Unable to find matching results."
 
 def retrieve(query_text: str):
     # Prepare the DB.
-    embedding_function = OpenAIEmbeddings()
+    embedding_function = embeddings()
     db = Chroma(persist_directory=CHROMA_PATH, embedding_function=embedding_function)
 
     # Search the DB.
@@ -40,7 +39,7 @@ def answer(query_text: str, results=None) -> str:
     prompt = prompt_template.format(context=context_text, question=query_text)
     print(prompt)
 
-    model = ChatOpenAI()
+    model = chat()
     return model.predict(prompt)
 
 
