@@ -10,6 +10,7 @@ workflow = "rag-tutorial"
 
 [deploy]
 mode = "pr"
+pr = "ready"
 branch = "main"
 
 [evals]
