@@ -27,7 +27,7 @@ Answer the question based on the above context: {question}
 
 
 NO_RESULTS = "Unable to find matching results."
-MIN_RELEVANCE = 0.7        # stricter: never answer from weak matches
+MIN_RELEVANCE = 0.6        # calibrated for Gemini embeddings (OpenAI ada-002 scores run higher: 0.7)
 
 
 @medic.surface("retrieve")
