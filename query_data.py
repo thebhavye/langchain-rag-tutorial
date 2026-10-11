@@ -28,6 +28,7 @@ Answer the question based on the above context: {question}
 
 NO_RESULTS = "Unable to find matching results."
 MIN_RELEVANCE = 0.6        # calibrated for Gemini embeddings (OpenAI ada-002 scores run higher: 0.7)
+MAX_PASSAGE_CHARS = 120    # cap each retrieved passage to keep prompt tokens down
 
 
 @medic.surface("retrieve")
@@ -46,7 +47,7 @@ def answer(query_text: str, results=None) -> str:
     if len(results) == 0 or results[0][1] < medic.value("min_relevance", MIN_RELEVANCE):
         return NO_RESULTS
 
-    context_text = "\n\n---\n\n".join([doc.page_content for doc, _score in results])
+    context_text = "\n\n---\n\n".join([doc.page_content[:MAX_PASSAGE_CHARS] for doc, _score in results])
     prompt_template = ChatPromptTemplate.from_template(medic.value("prompt_template", PROMPT_TEMPLATE))
     prompt = prompt_template.format(context=context_text, question=query_text)
     print(prompt)
