@@ -16,16 +16,13 @@ if not os.environ.get("MEDIC_RUNNER"):          # Medic's own runs initialize ne
 CHROMA_PATH = os.environ.get("CHROMA_PATH", "chroma")   # where the vector store lives
 
 PROMPT_TEMPLATE = """
-Answer the question using only the following context:
+Answer the question based only on the following context:
 
 {context}
 
 ---
 
-If the context does not explicitly state the answer, reply exactly: Not in the documents.
-Do not use outside knowledge or guess.
-
-Question: {question}
+Answer the question based on the above context: {question}
 """
 
 
